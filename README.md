@@ -1,29 +1,51 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/e7FBMwSa)
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=21872536&assignment_repo_type=AssignmentRepo)
-# Deploy FastAPI on Render
+# EmoGo Backend
 
-Use this repo as a template to deploy a Python [FastAPI](https://fastapi.tiangolo.com) service on Render.
+This is the backend server for the **EmoGo** mobile application, built with **FastAPI** and **MongoDB Atlas**. It handles data collection for Vlogs, Sentiments, and GPS coordinates.
 
-See https://render.com/docs/deploy-fastapi or follow the steps below:
+## 🔗 Data Dashboard (Assignment Requirement)
 
-## Manual Steps
+**You can view, monitor, and download all collected data at the following URI:**
 
-1. You may use this repository directly or [create your own repository from this template](https://github.com/render-examples/fastapi/generate) if you'd like to customize the code.
-2. Create a new Web Service on Render.
-3. Specify the URL to your new repository or this repository.
-4. Render will automatically detect that you are deploying a Python service and use `pip` to download the dependencies.
-5. Specify the following as the Start Command.
+👉 **[https://emogo-backend-longyuju1116.onrender.com/dashboard](https://emogo-backend-longyuju1116.onrender.com/dashboard)**
 
-    ```shell
-    uvicorn main:app --host 0.0.0.0 --port $PORT
+### Dashboard Features:
+1.  **View Data:** Real-time table view of GPS coordinates, Sentiments, and Vlogs.
+2.  **Download CSV:** One-click export for all GPS and Sentiment logs.
+3.  **Download ZIP:** One-click batch download for all MP4 Vlog files.
+4.  **Video Playback:** Direct streaming of uploaded videos from the browser.
+
+---
+
+## 🛠 Tech Stack
+
+* **Framework:** Python FastAPI
+* **Database:** MongoDB Atlas (NoSQL)
+* **File Storage:** MongoDB GridFS (for MP4 video storage)
+* **Deployment:** Render.com
+
+## 🚀 API Endpoints
+
+* `GET /dashboard`: The researcher/admin interface.
+* `POST /upload_data`: Receives JSON data (Sentiment & GPS).
+* `POST /upload_vlog`: Receives video files (Multipart/form-data).
+* `GET /export_csv`: Exports all text data to a single CSV file.
+* `GET /export_zip`: bundles all video files into a ZIP archive.
+
+## 📦 Local Development
+
+To run this project locally:
+
+1.  **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
     ```
 
-6. Click Create Web Service.
+2.  **Set Environment Variables:**
+    Create a `.env` file or set `MONGO_URI` in your terminal.
 
-Or simply click:
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/render-examples/fastapi)
-
-## Thanks
-
-Thanks to [Harish](https://harishgarg.com) for the [inspiration to create a FastAPI quickstart for Render](https://twitter.com/harishkgarg/status/1435084018677010434) and for some sample code!
+3.  **Run the server:**
+    ```bash
+    uvicorn main:app --reload
+    ```
